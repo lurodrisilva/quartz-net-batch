@@ -2,7 +2,7 @@
 
 SOLUTION   := BatchScheduler.sln
 DOCKERFILE := deploy/docker/Dockerfile
-IMAGE_NAME := batch-scheduler
+IMAGE_NAME := ghcr.io/lurodrisilva/quartz-net-batch
 IMAGE_TAG  := local
 
 restore:

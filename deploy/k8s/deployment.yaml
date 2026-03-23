@@ -37,7 +37,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: worker
-          image: yourregistry.azurecr.io/batch-scheduler:1.0.0
+          image: ghcr.io/lurodrisilva/quartz-net-batch:1.0.0
           imagePullPolicy: Always
           ports:
             - name: http

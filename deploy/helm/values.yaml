@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: yourregistry.azurecr.io/batch-scheduler
+  repository: ghcr.io/lurodrisilva/quartz-net-batch
   tag: "1.0.0"
   pullPolicy: IfNotPresent
 

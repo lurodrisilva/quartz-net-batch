@@ -129,8 +129,8 @@ Server=tcp:myquartzserver.database.windows.net,1433;Database=QuartzDB;User Id=sq
 
 ```bash
 # Build and push container image
-docker build -f deploy/docker/Dockerfile -t yourregistry.azurecr.io/batch-scheduler:1.0.0 .
-docker push yourregistry.azurecr.io/batch-scheduler:1.0.0
+docker build -f deploy/docker/Dockerfile -t ghcr.io/lurodrisilva/quartz-net-batch:1.0.0 .
+docker push ghcr.io/lurodrisilva/quartz-net-batch:1.0.0
 
 # Create secret for connection string
 kubectl create namespace batch-scheduler
@@ -141,7 +141,7 @@ kubectl create secret generic batch-scheduler-secrets \
 # Deploy with Helm
 helm install batch-scheduler deploy/helm \
   --namespace batch-scheduler \
-  --set image.repository=yourregistry.azurecr.io/batch-scheduler \
+  --set image.repository=ghcr.io/lurodrisilva/quartz-net-batch \
   --set image.tag=1.0.0
 ```
 

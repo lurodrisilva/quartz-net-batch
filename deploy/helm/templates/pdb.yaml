@@ -1,0 +1,13 @@
+{{- if .Values.pdb.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "batch-scheduler.fullname" . }}-pdb
+  labels:
+    {{- include "batch-scheduler.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.pdb.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "batch-scheduler.selectorLabels" . | nindent 6 }}
+{{- end }}

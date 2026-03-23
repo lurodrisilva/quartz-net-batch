@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Batch.Observability</RootNamespace>
+    <AssemblyName>Batch.Observability</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Batch.Domain\Batch.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Dynatrace OneAgent SDK for custom instrumentation (tracing) -->
+    <PackageReference Include="Dynatrace.OneAgent.Sdk" Version="1.8.0" />
+
+    <!-- .NET metrics via System.Diagnostics.Metrics (built-in, no extra package for net8.0) -->
+    <!-- Microsoft.Extensions.Diagnostics provides IMeterFactory DI integration -->
+    <PackageReference Include="Microsoft.Extensions.Diagnostics" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
+  </ItemGroup>
+
+</Project>

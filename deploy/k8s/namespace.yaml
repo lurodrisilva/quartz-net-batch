@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: batch-scheduler
+  labels:
+    app.kubernetes.io/part-of: batch-scheduler
+    dt-monitoring: "true"

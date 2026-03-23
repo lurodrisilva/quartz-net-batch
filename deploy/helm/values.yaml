@@ -1,0 +1,75 @@
+replicaCount: 2
+
+image:
+  repository: yourregistry.azurecr.io/batch-scheduler
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: acr-pull-secret
+
+serviceAccount:
+  create: true
+  name: "batch-scheduler-sa"
+  annotations:
+    azure.workload.identity/client-id: "<managed-identity-client-id>"
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+env:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  DOTNET_gcServer: "1"
+
+configMap:
+  Quartz__SchedulerName: "BatchScheduler"
+  Quartz__InstanceId: "AUTO"
+  Quartz__ThreadPoolSize: "10"
+  Quartz__Clustered: "true"
+  Quartz__ClusterCheckinIntervalMs: "15000"
+  Quartz__MisfireThresholdMs: "60000"
+  Quartz__TablePrefix: "QRTZ_"
+  JobSchedules__RecurringJob__Enabled: "true"
+  JobSchedules__RecurringJob__CronExpression: "0 0/5 * * * ?"
+  JobSchedules__RecurringJob__BatchSize: "100"
+  JobSchedules__OneTimeJob__Enabled: "false"
+
+secrets:
+  existingSecret: "batch-scheduler-secrets"
+
+probes:
+  startup:
+    path: /health/startup
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    failureThreshold: 30
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 30
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 3
+
+pdb:
+  enabled: true
+  minAvailable: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

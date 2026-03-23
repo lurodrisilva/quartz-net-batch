@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Batch.Domain</RootNamespace>
+    <AssemblyName>Batch.Domain</AssemblyName>
+  </PropertyGroup>
+
+</Project>

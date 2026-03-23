@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: batch-scheduler-config
+  namespace: batch-scheduler
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  Quartz__SchedulerName: "BatchScheduler"
+  Quartz__InstanceId: "AUTO"
+  Quartz__ThreadPoolSize: "10"
+  Quartz__Clustered: "true"
+  Quartz__ClusterCheckinIntervalMs: "15000"
+  Quartz__MisfireThresholdMs: "60000"
+  Quartz__TablePrefix: "QRTZ_"
+  JobSchedules__RecurringJob__Enabled: "true"
+  JobSchedules__RecurringJob__CronExpression: "0 0/5 * * * ?"
+  JobSchedules__RecurringJob__BatchSize: "100"
+  JobSchedules__OneTimeJob__Enabled: "false"
